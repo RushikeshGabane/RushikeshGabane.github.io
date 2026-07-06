@@ -129,22 +129,79 @@
     .hero-content p { font-size: 1.1rem; color: var(--text-muted); margin-bottom: 2.5rem; max-width: 500px; }
     .hero-actions { display: flex; gap: 1rem; flex-wrap: wrap; }
 
-    /* Hero Terminal Card */
-    .hero-visual { display: flex; justify-content: center; align-items: center; perspective: 1000px; }
-    .terminal-card { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: var(--radius); backdrop-filter: blur(16px); width: 100%; max-width: 420px; box-shadow: 0 30px 60px rgba(0,0,0,0.5), inset 0 1px 0 rgba(255,255,255,0.05); position: relative; transform-style: preserve-3d; transition: transform 0.1s ease-out; overflow: hidden; }
-    .terminal-header { display: flex; align-items: center; gap: 0.5rem; padding: 1rem 1.5rem; border-bottom: 1px solid var(--border-color); background: rgba(255,255,255,0.02); }
-    .terminal-dot { width: 10px; height: 10px; border-radius: 50%; }
-    .dot-red { background: #ff5f56; } .dot-yellow { background: #ffbd2e; } .dot-green { background: #27c93f; }
-    .terminal-title { margin-left: auto; font-family: var(--font-code); font-size: 0.75rem; color: var(--text-dim); }
-    .terminal-body { padding: 1.5rem; font-family: var(--font-code); font-size: 0.85rem; }
-    .terminal-line { margin-bottom: 0.8rem; color: var(--text-muted); }
-    .terminal-line .cmd { color: var(--accent-cyan); }
-    .terminal-line .out { color: var(--success); }
-    .stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 1.5rem; }
-    .stat-item { background: rgba(255,255,255,0.02); padding: 1rem; border-radius: 12px; border: 1px solid var(--border-color); transition: var(--transition); }
-    .stat-item:hover { border-color: var(--accent-cyan); transform: translateY(-2px); }
-    .stat-value { font-size: 1.6rem; font-weight: 700; background: linear-gradient(135deg, #fff, var(--accent-cyan)); -webkit-background-clip: text; background-clip: text; color: transparent; margin-bottom: 0.2rem; }
-    .stat-label { font-size: 0.7rem; color: var(--text-muted); text-transform: uppercase; letter-spacing: 1px; }
+    /* UNIQUE ANIMATED AI CORE VISUAL */
+    .hero-visual { display: flex; justify-content: center; align-items: center; perspective: 1000px; min-height: 400px; }
+    .orbit-system { position: relative; width: 300px; height: 300px; display: flex; justify-content: center; align-items: center; transition: transform 0.1s ease-out; }
+    .orbit-glow { position: absolute; width: 220px; height: 220px; background: var(--accent-cyan); filter: blur(80px); opacity: 0.3; border-radius: 50%; animation: pulseGlow 4s ease-in-out infinite; z-index: 0; }
+    @keyframes pulseGlow { 0%, 100% { opacity: 0.2; transform: scale(0.9); } 50% { opacity: 0.45; transform: scale(1.1); } }
+
+    .profile-core { width: 190px; height: 190px; border-radius: 50%; position: relative; z-index: 10; border: 2px solid rgba(34, 211, 238, 0.6); box-shadow: 0 0 30px rgba(34, 211, 238, 0.3), inset 0 0 20px rgba(0,0,0,0.5); overflow: hidden; background: var(--bg-secondary); }
+    .profile-image { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
+    
+    /* Strong HUD Targeting Brackets & Role Badge */
+    .hud-bracket { position: absolute; width: 30px; height: 30px; border: 2px solid var(--accent-cyan); z-index: 15; filter: drop-shadow(0 0 6px var(--accent-cyan)); }
+    .bracket-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; border-top-left-radius: 6px; }
+    .bracket-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; border-top-right-radius: 6px; }
+    .bracket-bl { bottom: 12px; left: 12px; border-right: none; border-top: none; border-bottom-left-radius: 6px; }
+    .bracket-br { bottom: 12px; right: 12px; border-left: none; border-top: none; border-bottom-right-radius: 6px; }
+
+    .role-badge { 
+      position: absolute; 
+      bottom: 20px; 
+      left: 50%; 
+      transform: translateX(-50%); 
+      background: rgba(3, 5, 9, 0.9); 
+      border: 1px solid var(--accent-cyan); 
+      padding: 0.4rem 1rem; 
+      border-radius: 99px; 
+      font-family: var(--font-code); 
+      font-weight: 700; 
+      font-size: 0.7rem; 
+      color: var(--accent-cyan); 
+      letter-spacing: 1.5px; 
+      white-space: nowrap; 
+      box-shadow: 0 0 20px rgba(34, 211, 238, 0.4), inset 0 1px 0 rgba(255,255,255,0.05); 
+      z-index: 20; 
+      backdrop-filter: blur(8px);
+      text-transform: uppercase;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      text-shadow: 0 0 8px var(--accent-cyan);
+    }
+    .role-badge::before { 
+      content: ''; 
+      width: 6px; 
+      height: 6px; 
+      background: var(--success); 
+      border-radius: 50%; 
+      box-shadow: 0 0 8px var(--success); 
+      animation: pulse 2s infinite; 
+    }
+
+    .orbit-ring { position: absolute; border-radius: 50%; border: 1px dashed rgba(255,255,255,0.1); }
+    .orbit-1 { width: 270px; height: 270px; animation: spin 15s linear infinite; }
+    .orbit-2 { width: 360px; height: 360px; animation: spin 25s linear infinite reverse; border-color: rgba(139, 92, 246, 0.15); }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @keyframes spin-reverse { to { transform: rotate(-360deg); } }
+
+    .orbit-pos { position: absolute; }
+    .orbit-1 .pos-1 { top: -14px; left: 50%; transform: translateX(-50%); }
+    .orbit-1 .pos-2 { bottom: -14px; left: 50%; transform: translateX(-50%); }
+    .orbit-1 .pos-3 { left: -14px; top: 50%; transform: translateY(-50%); }
+    .orbit-1 .pos-4 { right: -14px; top: 50%; transform: translateY(-50%); }
+    
+    .orbit-2 .pos-1 { top: -14px; left: 50%; transform: translateX(-50%); }
+    .orbit-2 .pos-2 { bottom: -14px; left: 50%; transform: translateX(-50%); }
+    .orbit-2 .pos-3 { left: -14px; top: 50%; transform: translateY(-50%); }
+    .orbit-2 .pos-4 { right: -14px; top: 50%; transform: translateY(-50%); }
+
+    .orbit-1 .orbit-item { animation: spin-reverse 15s linear infinite; display: inline-block; }
+    .orbit-2 .orbit-item { animation: spin 25s linear infinite; display: inline-block; }
+
+    .orbit-item { padding: 0.4rem 0.9rem; background: rgba(8, 12, 20, 0.85); backdrop-filter: blur(4px); border: 1px solid rgba(34, 211, 238, 0.3); border-radius: 99px; font-family: var(--font-code); font-size: 0.75rem; color: var(--accent-cyan); box-shadow: 0 4px 10px rgba(0,0,0,0.4); }
+    .orbit-item.alt { color: var(--accent-secondary); border-color: rgba(139, 92, 246, 0.3); }
+
     @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.5; } }
 
     /* Marquee */
@@ -219,10 +276,12 @@
 
     /* Responsive */
     @media (max-width: 900px) {
-      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 4rem; }
+      .hero-grid { grid-template-columns: 1fr; text-align: center; gap: 6rem; }
       .hero-content .hero-tag, .hero-typewriter { justify-content: center; }
       .hero-content p { margin: 0 auto 2rem; }
       .hero-actions { justify-content: center; }
+      .hero-visual { margin-top: 2rem; }
+      .orbit-system { transform: scale(0.9); }
     }
     @media (max-width: 600px) {
       .nav-inner { background: transparent; backdrop-filter: none; box-shadow: none; padding: 0; }
@@ -233,7 +292,7 @@
       .timeline::before, .timeline-progress { left: 10px; }
       .timeline-item { padding-left: 35px; }
       .timeline-marker { left: 1px; width: 16px; height: 16px; }
-      .stat-grid { grid-template-columns: 1fr; }
+      .orbit-system { transform: scale(0.75); margin-bottom: 2rem; }
     }
   </style>
 </head>
@@ -279,31 +338,38 @@
         <div class="hero-tag">Available for Opportunities</div>
         <h1> <span class="highlight">AI/ML Engineer</span></h1>
         <div class="hero-typewriter" id="typewriter"></div>
-        <p>Specializing in Computer Vision, Deep Learning, and scalable API deployment. Transforming complex visual data into actionable business insights.</p>
+        <p>AI/ML Engineer with hands-on industry experience in developing and deploying production-grade Computer Vision and Deep Learning solutions. Proficient in Python, PyTorch, YOLO, OpenCV, FastAPI, and OpenVINO.</p>
         <div class="hero-actions">
           <a href="#contact" class="btn btn-primary magnetic"><span>Get in Touch</span></a>
           <a href="https://linkedin.com/in/rushikesh-gabane-b14258274" target="_blank" rel="noopener" class="btn btn-outline magnetic">LinkedIn Profile</a>
         </div>
       </div>
       <div class="hero-visual reveal stagger" style="--idx: 1;">
-        <div class="terminal-card" id="heroCard">
-          <div class="terminal-header">
-            <div class="terminal-dot dot-red"></div>
-            <div class="terminal-dot dot-yellow"></div>
-            <div class="terminal-dot dot-green"></div>
-            <span class="terminal-title">rg@ai-engine: ~</span>
+        <!-- Unique Animated AI Core UI with HUD Style -->
+        <div class="orbit-system" id="orbitSystem">
+          <div class="orbit-glow"></div>
+          
+          <div class="orbit-ring orbit-2">
+            <div class="orbit-pos pos-1"><span class="orbit-item alt">OpenVINO</span></div>
+            <div class="orbit-pos pos-2"><span class="orbit-item alt">Python</span></div>
+            <div class="orbit-pos pos-3"><span class="orbit-item alt">TensorRT</span></div>
+            <div class="orbit-pos pos-4"><span class="orbit-item alt">MySQL</span></div>
           </div>
-          <div class="terminal-body">
-            <div class="terminal-line"><span class="cmd">> python deploy_model.py --version 2.0</span></div>
-            <div class="terminal-line"><span class="out">✓ Model loaded successfully</span></div>
-            <div class="terminal-line"><span class="out">✓ API endpoints active</span></div>
-            <div class="terminal-line"><span class="cmd">> system.status</span></div>
-            <div class="stat-grid">
-              <div class="stat-item"><div class="stat-value" data-target="8" data-suffix="+">0</div><div class="stat-label">Months Exp.</div></div>
-              <div class="stat-item"><div class="stat-value" data-target="99.9" data-suffix="%">0</div><div class="stat-label">API Uptime</div></div>
-              <div class="stat-item"><div class="stat-value" data-target="40" data-suffix="%">0</div><div class="stat-label">Efficiency</div></div>
-              <div class="stat-item"><div class="stat-value" data-target="95" data-suffix="%+">0</div><div class="stat-label">OCR Acc.</div></div>
-            </div>
+
+          <div class="orbit-ring orbit-1">
+            <div class="orbit-pos pos-1"><span class="orbit-item">PyTorch</span></div>
+            <div class="orbit-pos pos-2"><span class="orbit-item">OpenCV</span></div>
+            <div class="orbit-pos pos-3"><span class="orbit-item">YOLO</span></div>
+            <div class="orbit-pos pos-4"><span class="orbit-item">FastAPI</span></div>
+          </div>
+
+          <div class="profile-core">
+            <div class="hud-bracket bracket-tl"></div>
+            <div class="hud-bracket bracket-tr"></div>
+            <div class="hud-bracket bracket-bl"></div>
+            <div class="hud-bracket bracket-br"></div>
+            <img src="https://z-cdn-media.chatglm.cn/files/2fee9faf-d2a4-4c40-b24e-92306ddc5aca.jpg?auth_key=1883322232-b87960e35b09436cb9caab33c7d9932c-0-856be2ca6f714768548382af49443b94" alt="Rushikesh Gabane" class="profile-image">
+            
           </div>
         </div>
       </div>
@@ -313,8 +379,8 @@
   <!-- Marquee -->
   <div class="marquee-container">
     <div class="marquee-track">
-      <div class="marquee-item">Python</div><div class="marquee-item">PyTorch</div><div class="marquee-item">YOLOv8</div><div class="marquee-item">FastAPI</div><div class="marquee-item">OpenCV</div><div class="marquee-item">Docker</div><div class="marquee-item">Deep Learning</div><div class="marquee-item">Computer Vision</div>
-      <div class="marquee-item">Python</div><div class="marquee-item">PyTorch</div><div class="marquee-item">YOLOv8</div><div class="marquee-item">FastAPI</div><div class="marquee-item">OpenCV</div><div class="marquee-item">Docker</div><div class="marquee-item">Deep Learning</div><div class="marquee-item">Computer Vision</div>
+      <div class="marquee-item">Python</div><div class="marquee-item">C++</div><div class="marquee-item">PyTorch</div><div class="marquee-item">TensorFlow</div><div class="marquee-item">YOLO v8/v11</div><div class="marquee-item">OpenCV</div><div class="marquee-item">FastAPI</div><div class="marquee-item">OpenVINO</div><div class="marquee-item">GStreamer</div><div class="marquee-item">MySQL</div>
+      <div class="marquee-item">Python</div><div class="marquee-item">C++</div><div class="marquee-item">PyTorch</div><div class="marquee-item">TensorFlow</div><div class="marquee-item">YOLO v8/v11</div><div class="marquee-item">OpenCV</div><div class="marquee-item">FastAPI</div><div class="marquee-item">OpenVINO</div><div class="marquee-item">GStreamer</div><div class="marquee-item">MySQL</div>
     </div>
   </div>
 
@@ -323,12 +389,12 @@
       <h2 class="section-title reveal"><span class="word">About</span> <span class="word">Me</span></h2>
       <p class="section-subtitle">// Context & Background</p>
       <div class="about-content reveal">
-        <p class="about-text">Results-driven AI/ML Engineer with hands-on production experience in computer vision, deep learning, and industrial automation. I leverage expertise in Python, PyTorch, YOLO, and FastAPI to deliver scalable, enterprise-ready solutions. Proven ability to collaborate across cross-functional teams, communicate with stakeholders, and optimize models for real-time deployment.</p>
+        <p class="about-text">Results-driven AI/ML Engineer with hands-on industry experience in developing and deploying production-grade Computer Vision and Deep Learning solutions. I specialize in OCR, object detection, video analytics, action recognition, and edge AI deployment for industrial automation. Proven ability to collaborate across cross-functional teams, communicate with stakeholders, and optimize models for real-time deployment.</p>
         <div class="info-grid">
           <div class="info-card"><div class="info-label">Location</div><div class="info-value">Pune, Maharashtra</div></div>
           <div class="info-card"><div class="info-label">Languages</div><div class="info-value">English, Hindi, Marathi</div></div>
-          <div class="info-card"><div class="info-label">Work Auth</div><div class="info-value">Indian Citizen</div></div>
-          <div class="info-card"><div class="info-label">Availability</div><div class="info-value">Immediate / 15 Days</div></div>
+          <div class="info-card"><div class="info-label">Work Auth & Relocation</div><div class="info-value">Indian Citizen | Willing to Relocate</div></div>
+          <div class="info-card"><div class="info-label">Availability</div><div class="info-value">Immediate</div></div>
         </div>
       </div>
     </div>
@@ -342,19 +408,19 @@
         <div class="skill-card reveal stagger" style="--idx:0;">
           <h3><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"></circle><path d="M12 8v8M8 12h8"></path></svg>AI & Computer Vision</h3>
           <div class="skill-tags">
-            <span class="tag">PyTorch</span><span class="tag">YOLO v8/v11</span><span class="tag">OpenCV</span><span class="tag">Ultralytics</span><span class="tag">CNN/LSTM</span><span class="tag">OCR</span><span class="tag">EfficientNet</span><span class="tag">VLMs</span>
+            <span class="tag">Python</span><span class="tag">C++</span><span class="tag">PyTorch</span><span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">YOLO v8/v11</span><span class="tag">OpenCV</span><span class="tag">GStreamer</span><span class="tag">CNN/LSTM</span><span class="tag">EfficientNet</span><span class="tag">VLMs</span>
           </div>
         </div>
         <div class="skill-card reveal stagger" style="--idx:1;">
-          <h3><svg viewBox="0 0 24 24"><path d="M8 18l-6-6 6-6M16 6l6 6-6 6"></path></svg>Web & Backend</h3>
+          <h3><svg viewBox="0 0 24 24"><path d="M8 18l-6-6 6-6M16 6l6 6-6 6"></path></svg>Deployment & Optimization</h3>
           <div class="skill-tags">
-            <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">REST APIs</span><span class="tag">Streamlit</span><span class="tag">Docker</span><span class="tag">Linux</span>
+            <span class="tag">FastAPI</span><span class="tag">REST APIs</span><span class="tag">OpenVINO</span><span class="tag">TensorRT</span><span class="tag">INT8 Quantization</span><span class="tag">Docker</span><span class="tag">Streamlit</span><span class="tag">Linux (Ubuntu/CentOS)</span>
           </div>
         </div>
         <div class="skill-card reveal stagger" style="--idx:2;">
           <h3><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"></rect><path d="M3 9h18M9 21V9"></path></svg>Data & DevOps</h3>
           <div class="skill-tags">
-            <span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">MySQL</span><span class="tag">Scikit-learn</span><span class="tag">Git/GitHub</span><span class="tag">AWS/Azure</span><span class="tag">Power BI</span>
+            <span class="tag">MySQL</span><span class="tag">Pandas</span><span class="tag">NumPy</span><span class="tag">Scikit-learn</span><span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">Git/GitHub</span><span class="tag">AWS/Azure/GCP</span>
           </div>
         </div>
       </div>
@@ -371,16 +437,16 @@
           <div class="timeline-marker"></div>
           <div class="timeline-card">
             <div class="timeline-header">
-              <h3 class="timeline-title">AI / Computer Vision Engineer</h3>
-              <span class="timeline-meta">Jan 2025 – Present</span>
+              <h3 class="timeline-title">AI/ML Engineer</h3>
+              <span class="timeline-meta">Sep 2025 – Present</span>
             </div>
             <span class="timeline-company">Rapportsoft Consultancy Technology, Pune</span>
             <ul class="timeline-list">
-              <li>Designed and deployed Kalmar Container Intelligence System for smart gate automation, improving operational efficiency by 40%.</li>
-              <li>Developed production-ready OCR system using YOLO and vision-language models achieving 95%+ accuracy in automated container number recognition.</li>
-              <li>Built REST APIs using FastAPI for real-time AI inference, handling 1000+ requests daily with 99.9% uptime.</li>
-              <li>Implemented CNN-LSTM action recognition models for automated equipment monitoring, reducing manual intervention by 60%.</li>
-              <li>Optimized deep learning models through INT8 quantization, reducing model size by 72% for edge deployment.</li>
+              <li>Developed AI-based computer vision applications for logistics and container yard automation.</li>
+              <li>Built real-time video processing pipelines using Python, OpenCV, YOLO, and GStreamer.</li>
+              <li>Developed OCR systems for automatic container number recognition using YOLO and Vision Language Models.</li>
+              <li>Optimized AI models using OpenVINO for Intel CPU deployment, achieving significant performance improvements.</li>
+              <li>Developed FastAPI inference APIs and integrated AI outputs with MySQL databases on Ubuntu Linux servers.</li>
             </ul>
           </div>
         </div>
@@ -393,9 +459,9 @@
             </div>
             <span class="timeline-company">Access Million (Remote)</span>
             <ul class="timeline-list">
-              <li>Conducted exploratory data analysis and feature engineering for marketing analytics projects using Python, Pandas, and Matplotlib.</li>
-              <li>Developed logistic regression model for loan approval prediction with 85% accuracy, improving campaign targeting efficiency.</li>
-              <li>Presented data-driven insights to stakeholders and translated technical findings into actionable business recommendations.</li>
+              <li>Performed EDA and feature engineering for marketing analytics projects using Python, Pandas, and Matplotlib.</li>
+              <li>Developed logistic regression model for loan approval prediction achieving 85% accuracy.</li>
+              <li>Translated technical findings into actionable business recommendations for stakeholders.</li>
             </ul>
           </div>
         </div>
@@ -405,36 +471,56 @@
 
   <section id="projects" class="section">
     <div class="container">
-      <h2 class="section-title reveal"><span class="word"></span> <span class="word">Projects</span></h2>
+      <h2 class="section-title reveal"><span class="word">Key</span> <span class="word">Projects</span></h2>
       <p class="section-subtitle">// Things I've built</p>
       <div class="project-grid">
         <div class="project-card reveal stagger" style="--idx:0;">
           <div class="project-visual"></div>
           <div class="project-content">
-            <h3 class="project-title">Reach-Stacker Pick-Place Detection With Container Number Detection</h3>
-            <p class="project-desc">Production AI platform integrating YOLO object detection, OCR, and action recognition for automated logistics operations.</p>
+            <h3 class="project-title">Smart Gate Automation System</h3>
+            <p class="project-desc">AI-powered system that automatically detects trucks, containers, license plates, and container numbers at entry/exit gates using multiple IP cameras to generate digital inspection records without manual intervention.</p>
             <div class="project-tech">
-              <span class="tag">Python</span><span class="tag">PyTorch</span><span class="tag">YOLO</span><span class="tag">FastAPI</span>
+              <span class="tag">Python</span><span class="tag">YOLO</span><span class="tag">OpenCV</span><span class="tag">FastAPI</span><span class="tag">OpenVINO</span><span class="tag">MySQL</span>
             </div>
           </div>
         </div>
         <div class="project-card reveal stagger" style="--idx:1;">
           <div class="project-visual"></div>
           <div class="project-content">
-            <h3 class="project-title">Container Damage Detection Systeam</h3>
-            <p class="project-desc">YOLO-based damage classification system for automated vehicle inspection with a user-friendly Streamlit interface.</p>
+            <h3 class="project-title">Reach Stacker & Fork-Lifter Movement Recognition</h3>
+            <p class="project-desc">CNN-LSTM-based video classification model to detect Pick, Place, and Normal operations of Kalmar reach stackers for live inference optimization.</p>
             <div class="project-tech">
-              <span class="tag">YOLOv8</span><span class="tag">OpenCV</span><span class="tag">Streamlit</span>
+              <span class="tag">TensorFlow</span><span class="tag">Keras</span><span class="tag">CNN-LSTM</span><span class="tag">OpenCV</span>
             </div>
           </div>
         </div>
         <div class="project-card reveal stagger" style="--idx:2;">
           <div class="project-visual"></div>
           <div class="project-content">
-            <h3 class="project-title">Vehicle Number Detection Systeam (India)</h3>
-            <p class="project-desc">Custom YOLO-based plate detection pipeline combined with OCR for automated vehicle identification across multiple Indian state formats.</p>
+            <h3 class="project-title">Container Damage Detection System</h3>
+            <p class="project-desc">AI model for automatic detection of structural damage on shipping containers. Integrated directly with the Smart Gate application to improve detection accuracy.</p>
             <div class="project-tech">
-              <span class="tag">YOLO</span><span class="tag">OCR</span><span class="tag">Tesseract</span><span class="tag">Python</span>
+              <span class="tag">YOLOv8</span><span class="tag">PyTorch</span><span class="tag">OpenCV</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card reveal stagger" style="--idx:3;">
+          <div class="project-visual"></div>
+          <div class="project-content">
+            <h3 class="project-title">Container OCR System</h3>
+            <p class="project-desc">Robust OCR pipeline capable of reading ISO container numbers under difficult environmental conditions, featuring ISO checksum verification and Vision Language Model integration.</p>
+            <div class="project-tech">
+              <span class="tag">Python</span><span class="tag">YOLO</span><span class="tag">VLM</span><span class="tag">FastAPI</span>
+            </div>
+          </div>
+        </div>
+        <div class="project-card reveal stagger" style="--idx:4;">
+          <div class="project-visual"></div>
+          <div class="project-content">
+            <h3 class="project-title">Digital Twin Inventory Mapping</h3>
+            <p class="project-desc">AI workflow that automatically updates container locations in a database after successful movement recognition and OCR verification.</p>
+            <div class="project-tech">
+              <span class="tag">Python</span><span class="tag">FastAPI</span><span class="tag">MySQL</span>
             </div>
           </div>
         </div>
@@ -454,20 +540,20 @@
               <h3 class="timeline-title">B.Sc. in Computer Science</h3>
               <span class="timeline-meta">Graduated: Mar 2025</span>
             </div>
-            <span class="timeline-company">K.T. Patil College, Dharashiv</span>
+            <span class="timeline-company">K.T. Patil College, Dharashiv, Maharashtra</span>
             <p style="color: var(--text-muted); margin-bottom: 0.5rem;">Grade: 81.2% (First Class with Distinction)</p>
-            <p style="color: var(--text-muted); font-size: 0.9rem;">Relevant Coursework: Machine Learning, Deep Learning, Computer Vision, Data Structures, Algorithms, DBMS</p>
+            <p style="color: var(--text-muted); font-size: 0.9rem;">Relevant Coursework: Machine Learning, Deep Learning, Computer Vision, Data Structures, Algorithms, Database Management, Software Engineering</p>
           </div>
         </div>
         <div class="timeline-item reveal">
           <div class="timeline-marker"></div>
           <div class="timeline-card">
-            <div class="timeline-header"><h3 class="timeline-title">Certifications</h3></div>
+            <div class="timeline-header"><h3 class="timeline-title">Certifications & Training</h3></div>
             <ul class="timeline-list">
-              <li>AI Certification - Top Mentor (Guided by Mr. Swapnil Sourav)</li>
-              <li>Master in Data Science & Analytics - Top Mentor</li>
-              <li>Python with Data Analysis - Top Mentor</li>
-              <li>Database Management Systems & MySQL - Top Mentor</li>
+              <li>AI Certification — Top Mentor (Guided by Mr. Swapnil Sourav)</li>
+              <li>Master in Data Science & Analytics — Top Mentor</li>
+              <li>Python with Data Analysis (Pandas, Matplotlib, Scikit-learn) — Top Mentor</li>
+              <li>Database Management Systems & MySQL — Top Mentor</li>
             </ul>
           </div>
         </div>
@@ -535,7 +621,7 @@
       }
       animateCursor();
 
-      document.querySelectorAll('a, button, .terminal-card, .skill-card, .project-card, .info-card, .stat-item').forEach(el => {
+      document.querySelectorAll('a, button, .profile-core, .skill-card, .project-card, .info-card, .orbit-item').forEach(el => {
         el.addEventListener('mouseenter', () => cursorOutline.classList.add('hover'));
         el.addEventListener('mouseleave', () => cursorOutline.classList.remove('hover'));
       });
@@ -694,44 +780,12 @@
         entries.forEach(entry => {
           if (entry.isIntersecting) {
             entry.target.classList.add('active');
-            const counters = entry.target.querySelectorAll('.stat-value');
-            counters.forEach(counter => {
-              if (!counter.classList.contains('counted')) {
-                animateCounter(counter);
-                counter.classList.add('counted');
-              }
-            });
             scrollObserver.unobserve(entry.target);
           }
         });
       }, observerOptions);
 
       revealElements.forEach(el => scrollObserver.observe(el));
-
-      // Animated Counters
-      function animateCounter(element) {
-        const target = parseFloat(element.getAttribute('data-target'));
-        const suffix = element.getAttribute('data-suffix');
-        const duration = 2000;
-        let startTime = null;
-
-        function step(timestamp) {
-          if (!startTime) startTime = timestamp;
-          const progress = Math.min((timestamp - startTime) / duration, 1);
-          const current = target * Math.floor(progress * 100) / 100;
-          if (target % 1 !== 0) {
-            element.textContent = current.toFixed(1) + suffix;
-          } else {
-            element.textContent = Math.floor(current) + suffix;
-          }
-          if (progress < 1) {
-            requestAnimationFrame(step);
-          } else {
-            element.textContent = target + suffix;
-          }
-        }
-        requestAnimationFrame(step);
-      }
 
       // Mobile Nav
       const navToggle = document.getElementById('mobileToggle');
@@ -770,7 +824,7 @@
       });
 
       // Typewriter
-      const phrases = ["AI/ML Engineer", "Computer Vision Specialist", "Deep Learning Practitioner", "API Developer"];
+      const phrases = ["AI/ML Engineer", "Computer Vision Specialist", "Deep Learning Practitioner", "Edge AI Deployer"];
       const typewriterEl = document.getElementById('typewriter');
       let phraseIndex = 0, charIndex = 0, isDeleting = false;
 
@@ -795,19 +849,24 @@
       }
       typeEffect();
 
-      // 3D Tilt Terminal
-      const heroCard = document.getElementById('heroCard');
-      if (heroCard) {
-        heroCard.addEventListener('mousemove', (e) => {
-          const rect = heroCard.getBoundingClientRect();
-          const x = e.clientX - rect.left;
-          const y = e.clientY - rect.top;
-          const rotateX = ((y - rect.height / 2) / (rect.height / 2)) * -5;
-          const rotateY = ((x - rect.width / 2) / (rect.width / 2)) * 5;
-          heroCard.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-5px)`;
+      // 3D Parallax Tilt for Orbit System
+      const orbitSystem = document.getElementById('orbitSystem');
+      const heroVisual = document.querySelector('.hero-visual');
+      if (orbitSystem && heroVisual) {
+        heroVisual.addEventListener('mousemove', (e) => {
+          const rect = orbitSystem.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          const rotateX = (y / (rect.height / 2)) * -8;
+          const rotateY = (x / (rect.width / 2)) * 8;
+          orbitSystem.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         });
-        heroCard.addEventListener('mouseleave', () => {
-          heroCard.style.transform = 'perspective(1000px) rotateX(0) rotateY(0) translateY(0)';
+        heroVisual.addEventListener('mouseleave', () => {
+          orbitSystem.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+          orbitSystem.style.transition = 'transform 0.5s ease';
+        });
+        heroVisual.addEventListener('mouseenter', () => {
+          orbitSystem.style.transition = 'none';
         });
       }
 
